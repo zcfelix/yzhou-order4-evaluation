@@ -1,11 +1,10 @@
 package com.thoughtworks.ketsu.domain.user;
 
+import java.util.Map;
 import java.util.Optional;
 
 public interface UserRepository {
-    User save(User user);
+    User createUser(Map<String, Object> info);
 
-    Optional<User> ofId(UserId id);
-
-    User findUserByName(String userName);
+    Optional<User> findById(int id);
 }

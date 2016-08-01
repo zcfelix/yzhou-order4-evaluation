@@ -6,25 +6,24 @@ import com.thoughtworks.ketsu.domain.user.UserId;
 import com.thoughtworks.ketsu.infrastructure.mybatis.mappers.UserMapper;
 
 import javax.inject.Inject;
+import java.util.Map;
 import java.util.Optional;
+
+import static com.thoughtworks.ketsu.util.Json.mapper;
 
 public class MyBatisUserRepository implements UserRepository {
     @Inject
-    UserMapper mapper;
+    UserMapper userMapper;
 
     @Override
-    public com.thoughtworks.ketsu.domain.user.User save(com.thoughtworks.ketsu.domain.user.User user) {
-        mapper.save(user);
-        return mapper.ofId(user.getUserId().id());
+    public User createUser(Map<String, Object> info) {
+        userMapper.save(info);
+        return userMapper.findById(Integer.valueOf(info.get("id").toString()));
     }
 
     @Override
-    public Optional<com.thoughtworks.ketsu.domain.user.User> ofId(UserId id) {
-        return Optional.ofNullable(mapper.ofId(id.id()));
+    public Optional<User> findById(int id) {
+        return Optional.ofNullable(userMapper.findById(id));
     }
 
-    @Override
-    public User findUserByName(String userName) {
-        return mapper.findByUserName(userName);
-    }
 }

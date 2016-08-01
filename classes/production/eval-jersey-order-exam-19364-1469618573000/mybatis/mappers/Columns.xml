@@ -10,4 +10,19 @@
         U.password as userPassword,
         U.role as userRole
     </sql>
+
+    <sql id="order">
+        O.id as id,
+        O.user_id as user_id,
+        O.name as name,
+        O.address as address,
+        O.phone as phone,
+        O.total_price as total_price,
+        O.time as time,
+        O.id as order_id,
+        I.product_id as product_id,
+        I.quantity as quantity,
+        I.amount as amount
+    </sql>
+
 </mapper>

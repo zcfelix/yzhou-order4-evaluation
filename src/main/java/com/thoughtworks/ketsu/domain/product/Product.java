@@ -23,6 +23,10 @@ public class Product implements Record {
         return name;
     }
 
+    public double getPrice() {
+        return price;
+    }
+
     @Override
     public Map<String, Object> toJson(Routes routes) {
         return new HashMap<String, Object>() {{

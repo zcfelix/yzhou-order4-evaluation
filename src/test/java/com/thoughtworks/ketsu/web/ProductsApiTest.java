@@ -9,9 +9,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import javax.inject.Inject;
-import javax.ws.rs.GET;
 import javax.ws.rs.core.Response;
-
 import java.util.List;
 import java.util.Map;
 import java.util.regex.Pattern;
