@@ -36,7 +36,7 @@ public class RecordListWriter implements MessageBodyWriter<List<? extends Record
     @Override
     public void writeTo(List<? extends Record> records, Class<?> type, Type genericType, Annotation[] annotations, MediaType mediaType, MultivaluedMap<String, Object> httpHeaders, OutputStream entityStream) throws IOException, WebApplicationException {
         try (OutputStreamWriter outputStreamWriter = new OutputStreamWriter(entityStream)) {
-            outputStreamWriter.write(toJson(records.stream().map(record -> record.toJson(routesProvider.get())).collect(toList())));
+            outputStreamWriter.write(toJson(records.stream().map(record -> record.toRefJson(routesProvider.get())).collect(toList())));
         }
     }
 }

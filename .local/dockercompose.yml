@@ -1,0 +1,37 @@
+version: "2"
+services:
+  db:
+    image: tutum/mysql
+    volumes:
+    - /Users/ybzhou/Tw/eval-jersey-order-exam-19364-1469618573000/.local/db:/var/lib/mysql:rw
+    ports:
+    - 3306:3306
+    environment:
+      EXTRA_OPTS: --lower_case_table_names=1
+      MYSQL_DATABASE: data_store
+      MYSQL_PASS: mysql
+      MYSQL_PASSWORD: mysql
+      MYSQL_ROOT_PASSWORD: mysql
+      MYSQL_USER: mysql
+      ON_CREATE_DB: data_store
+    expose:
+    - 3306
+  runtime:
+    image: hub.deepi.cn/jersey-mysql-build
+    entrypoint: /bin/sh
+    command: -c 'tail -f /dev/null'
+    volumes:
+    - /var/run/docker.sock:/var/run/docker.sock
+    - /Users/ybzhou/Tw/eval-jersey-order-exam-19364-1469618573000:/codebase
+    links:
+    - db
+    ports:
+    - 8088:8088
+    environment:
+      DB_HOST: db
+      DB_NAME: data_store
+      DB_PASSWORD: mysql
+      DB_PORT: "3306"
+      DB_USERNAME: mysql
+    expose:
+    - 8088
