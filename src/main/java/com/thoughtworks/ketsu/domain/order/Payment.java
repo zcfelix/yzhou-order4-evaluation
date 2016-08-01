@@ -16,7 +16,7 @@ public class Payment implements Record {
     private int orderId;
     private String payType;
     private double amount;
-    private Date time;
+    private int time;
 
     public Payment() {
     }

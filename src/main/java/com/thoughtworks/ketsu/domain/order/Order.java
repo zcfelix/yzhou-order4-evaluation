@@ -17,8 +17,8 @@ public class Order implements Record {
     private String address;
     private String phone;
     private double totalPrice;
-    private Date time;
-    private List<Map<String, Object>> orderItems;
+    private int time;
+    private List<OrderItem> orderItems;
 
     public Order() {
     }
@@ -47,6 +47,10 @@ public class Order implements Record {
 
     @Override
     public Map<String, Object> toJson(Routes routes) {
+        List<Map<String, Object>> itemsList = new ArrayList<>();
+        for (OrderItem tmp : orderItems) {
+            itemsList.add(tmp.toJson(routes));
+        }
         return new HashMap<String, Object>() {{
             put("uri", routes.orderUri(Order.this));
             put("name", name);
@@ -54,7 +58,7 @@ public class Order implements Record {
             put("phone", phone);
             put("total_price", totalPrice);
             put("created_at", time);
-            put("order_items", orderItems);
+            put("order_items", itemsList);
         }};
     }
 

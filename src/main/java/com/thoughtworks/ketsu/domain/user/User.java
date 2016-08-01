@@ -16,14 +16,14 @@ public class User implements Record {
     @Inject
     ProductMapper productMapper;
 
-    private int id;
+    private String id;
     private String name;
 
     public User() {
     }
 
     public int getId() {
-        return id;
+        return Integer.valueOf(id);
     }
 
     public String getName() {

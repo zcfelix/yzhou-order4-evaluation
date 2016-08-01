@@ -8,10 +8,11 @@ var chai = require('chai');
 var assert = chai.assert;
 var tv4 = require('tv4');
 var endpoint = process.env.ENDPOINT;
+// var endpoint = "http://localhost:18088";
 
 console.log(endpoint);
 
-var productId, productURI, userName, orderURI, orderId;
+var productId, productURI, userName, userId, userURI, orderURI, orderId;
 
 describe("Test", function () {
   this.timeout(60000);
@@ -197,13 +198,17 @@ describe("Test", function () {
         assert.lengthOf(result.missing, 0, "Missing/unresolved JSON schema $refs (" + result.missing && result.missing.join(', ') + ") in schema: " + JSON.stringify(schema, null, 4) + " Error");
         assert.ok(result.valid, "Got unexpected response body: " + (result.error && result.error.message) + " " + JSON.stringify(schema, null, 4) + " Error");
       }
+      userURI = response.headers['location'];
+      userId = userURI.split("/")[userURI.split("/").length - 1];
+      // console.log(userId + "hahaha")
+      console.log(userURI);
       done();
     });
   });
   //
   it("POST /users/{id}/orders -> 201", function(done) {
     var options = {
-      url: endpoint + '/users/' + userName + '/orders',
+      url: endpoint + '/users/' + userId + '/orders',
       method: 'POST',
       qs: {},
       json: {
@@ -243,7 +248,7 @@ describe("Test", function () {
   //
   it("GET /users/{id}/orders -> 200", function(done) {
     var options = {
-      url: endpoint + '/users/' + userName + '/orders',
+      url: endpoint + '/users/' + userId + '/orders',
       method: 'GET',
       qs: {},
       json: "",
@@ -357,7 +362,7 @@ describe("Test", function () {
                 }
               },
               "required": [
-                "uri",
+                // "uri",
                 "product_id",
                 "quantity",
                 "amount"

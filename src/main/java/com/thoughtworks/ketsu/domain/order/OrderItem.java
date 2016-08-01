@@ -23,10 +23,11 @@ public class OrderItem implements Record {
         return productId;
     }
 
+
     @Override
     public Map<String, Object> toJson(Routes routes) {
         return new HashMap<String, Object>() {{
-            put("product_id", productId);
+            put("product_id", String.valueOf(productId));
             put("quantity", quantity);
             put("amount", amount);
         }};

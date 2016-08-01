@@ -7,7 +7,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Product implements Record {
-    private int id;
+    private String id;
     private String name;
     private String description;
     private double price;
@@ -15,7 +15,7 @@ public class Product implements Record {
     public Product() {
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
